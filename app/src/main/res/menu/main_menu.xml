@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:title="Specific Sensor"
+        android:checkableBehavior="single">
+
+        <menu>
+        <item
+            android:id="@+id/sanalysis"
+            android:icon="@drawable/analytics"
+            android:title="Sensor Analytics" />
+        <item
+            android:id="@+id/hdanalysis"
+            android:icon="@drawable/history"
+            android:title="Historic Data Analysis" />
+        <item
+            android:id="@+id/sconfig"
+            android:icon="@drawable/setting"
+            android:title="Sensor Configuration" />
+
+        </menu>
+
+    </item>
+
+
+    <item
+        android:title="Alert Notification"
+        android:checkableBehavior="single">
+
+        <menu>
+        <item
+            android:id="@+id/salert"
+            android:icon="@drawable/alert"
+            android:title="Sensor Alert" />
+        <item
+            android:id="@+id/asetting"
+            android:icon="@drawable/setting"
+            android:title="Alert Setting" />
+
+        </menu>
+
+    </item>
+
+
+
+
+</menu>
