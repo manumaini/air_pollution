@@ -55,6 +55,7 @@
 
 
         <EditText
+            android:id="@+id/user_name"
             android:textColor="@color/white"
             android:background="@color/darkgrey"
             android:padding="16dp"
@@ -83,6 +84,7 @@
 
 
         <EditText
+            android:id="@+id/password"
             android:textColor="@color/white"
             android:inputType="textPassword"
             android:padding="16dp"
@@ -122,5 +124,18 @@
         android:layout_below="@id/dic_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentBottom="true"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.Wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/colorAccent" />
 
 </RelativeLayout>
