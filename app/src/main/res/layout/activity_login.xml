@@ -98,6 +98,7 @@
 
 
     <Button
+        android:onClick="onClick_login"
         android:layout_alignParentEnd="true"
         android:textColor="@color/white"
         android:background="@drawable/drawable_shape1"

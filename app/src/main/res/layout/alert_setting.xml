@@ -8,8 +8,27 @@
 
 
     <TextView
-        android:text="alert_setting"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="26dp"
+        android:fontFamily="@font/font4"
+        android:textColor="@color/white"
+        android:text="Dashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+
+    <ImageView
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_bottom_design_part2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_bottom_design_part1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 </RelativeLayout>
