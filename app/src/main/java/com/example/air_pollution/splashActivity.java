@@ -1,6 +1,7 @@
 package com.example.air_pollution;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,6 @@ public class splashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
 
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -22,14 +22,20 @@ public class splashActivity extends AppCompatActivity {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }finally {
-                    Intent intent = new Intent(getApplicationContext(),loginActivity.class);
-                    startActivity(intent);
+                } finally {
+
+                    SharedPreferences sh = getSharedPreferences("login_data", MODE_PRIVATE);
+                    if (sh.contains("token")) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), loginActivity.class);
+                        startActivity(intent);
+                    }
                 }
 
             }
         }).start();
-
 
 
     }
@@ -45,9 +51,15 @@ public class splashActivity extends AppCompatActivity {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }finally {
-                    Intent intent = new Intent(getApplicationContext(),loginActivity.class);
-                    startActivity(intent);
+                } finally {
+                    SharedPreferences sh = getSharedPreferences("login_data", MODE_PRIVATE);
+                    if (sh.contains("token")) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), loginActivity.class);
+                        startActivity(intent);
+                    }
                 }
 
             }

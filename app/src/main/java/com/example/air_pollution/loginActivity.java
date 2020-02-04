@@ -1,6 +1,9 @@
 package com.example.air_pollution;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -15,17 +18,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class loginActivity extends AppCompatActivity {
 
     private EditText username;
     private EditText password;
-    private String url = " ";
+    private String url = "http://18.225.10.79:3000/users/authenticate";
     private ProgressBar progressBar;
+    private String TAG = "loginActivity";
 
 
     @Override
@@ -41,52 +43,99 @@ public class loginActivity extends AppCompatActivity {
     }
 
     public void onClick_login(View view) {
-        progressBar.setVisibility(View.VISIBLE);
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        progressBar.setVisibility(View.GONE);
+        if (username.getText().toString().isEmpty() && password.getText().toString().isEmpty()) {
+            username.setError("enter the user name");
+            password.setError("enter the password");
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+        } else if (username.getText().toString().isEmpty()) {
+            username.setError("enter the user name");
+
+        } else if (password.getText().toString().isEmpty()) {
+            password.setError("enter the password");
+
+        } else {
+            progressBar.setVisibility(View.VISIBLE);
+
+            JSONObject postparams = new JSONObject();
+            try {
+                postparams.put("username", username.getText().toString());
+                postparams.put("password", password.getText().toString());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
                 progressBar.setVisibility(View.GONE);
 
             }
-        }) {
 
-            @Override
-            protected Map getParams() {
-                Map params = new HashMap();
-                params.put("user_name",username.getText().toString());
-                params.put("password",password.getText().toString());
-                return params;
-            }
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        };
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postparams,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            progressBar.setVisibility(View.GONE);
 
-        jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 5000;
-            }
+                            SharedPreferences sharedPreferences = getSharedPreferences("login_data", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            @Override
-            public int getCurrentRetryCount() {
-                return 5000;
-            }
+                            try {
+                                String token = response.getString("token");
+                                editor.putString("token", token);
+                                Log.d(TAG, "onResponse: " + token);
 
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
 
-            }
-        });
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
-        requestQueue.add(jsonObjectRequest);
+                            try {
+                                JSONObject user = response.getJSONObject("user");
+                                String user_id = user.getString("id");
+                                String user_name = user.getString("name");
+                                editor.putString("user_id", user_id);
+                                editor.putString("user_name", user_name);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            editor.apply();
+
+
+                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progressBar.setVisibility(View.GONE);
+
+                }
+            });
+
+            jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+                @Override
+                public int getCurrentTimeout() {
+                    return 5000;
+                }
+
+                @Override
+                public int getCurrentRetryCount() {
+                    return 5000;
+                }
+
+                @Override
+                public void retry(VolleyError error) throws VolleyError {
+
+                }
+            });
+
+            requestQueue.add(jsonObjectRequest);
+
+
+        }
+
+
     }
 
 }
