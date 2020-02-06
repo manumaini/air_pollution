@@ -38,4 +38,7 @@ dependencies {
 
     //loading library
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    //date picker
+    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
 }
