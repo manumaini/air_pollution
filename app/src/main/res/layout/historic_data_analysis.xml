@@ -19,20 +19,85 @@
         android:layout_height="50dp">
 
 
-        <EditText
-            android:inputType="date"
-            android:id="@+id/user_name"
-            android:textColor="@color/white"
-            android:background="@color/darkgrey"
-            android:padding="16dp"
-            android:textColorHint="@color/backgrey"
-            android:hint="from"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+
+            <EditText
+                android:inputType="date"
+                android:id="@+id/from_date"
+                android:textColor="@color/white"
+                android:background="@color/darkgrey"
+                android:padding="16dp"
+                android:textColorHint="@color/backgrey"
+                android:hint="From (eg. DD/MM/YY)"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="16dp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/image_c1"
+                android:src="@drawable/calender_logo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+        </RelativeLayout>
+
 
 
 
     </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_below="@id/cardview1"
+        android:padding="30dp"
+        app:cardCornerRadius="30dp"
+        android:id="@+id/cardview2"
+        android:layout_marginTop="16dp"
+        android:elevation="8dp"
+        android:background="@drawable/cardview_back"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <EditText
+                android:inputType="date"
+                android:id="@+id/to_date"
+                android:textColor="@color/white"
+                android:background="@color/darkgrey"
+                android:padding="16dp"
+                android:textColorHint="@color/backgrey"
+                android:hint="To (eg. DD/MM/YY)"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="16dp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/image_c2"
+                android:src="@drawable/calender_logo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+        </RelativeLayout>
+
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
 
 
 
