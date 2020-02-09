@@ -9,7 +9,6 @@
 
     <androidx.cardview.widget.CardView
         android:padding="30dp"
-        app:cardCornerRadius="30dp"
         android:id="@+id/cardview1"
         android:layout_marginTop="16dp"
         android:elevation="8dp"
@@ -54,7 +53,6 @@
     <androidx.cardview.widget.CardView
         android:layout_below="@id/cardview1"
         android:padding="30dp"
-        app:cardCornerRadius="30dp"
         android:id="@+id/cardview2"
         android:layout_marginTop="16dp"
         android:elevation="8dp"
@@ -97,6 +95,15 @@
 
     </androidx.cardview.widget.CardView>
 
+
+
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:layout_marginTop="70dp"
+        android:layout_below="@id/cardview2"
+        android:id="@+id/historic_chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 

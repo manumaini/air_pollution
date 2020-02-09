@@ -45,6 +45,16 @@
     </item>
 
 
+    <item android:title="Account Setting">
+        <menu>
+            <item
+                android:icon="@drawable/logout"
+                android:id="@+id/log_out"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+
 
 
 </menu>

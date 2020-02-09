@@ -1,5 +1,7 @@
 package com.example.air_pollution;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -86,6 +88,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new alert_settingFragment()).commit();
                 navigationView.setCheckedItem(R.id.asetting);
                 break;
+
+            case R.id.log_out:
+                SharedPreferences sharedPreferences = getSharedPreferences("login_data",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("token");
+                Intent intent = new Intent(this,loginActivity.class);
+                startActivity(intent);
+
 
         }
         drawer.closeDrawer(GravityCompat.START);

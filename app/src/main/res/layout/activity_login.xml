@@ -100,6 +100,7 @@
 
 
     <Button
+        android:fontFamily="@font/font1"
         android:onClick="onClick_login"
         android:layout_alignParentEnd="true"
         android:textColor="@color/white"
