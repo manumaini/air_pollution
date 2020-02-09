@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new dashboard_fragment()).commit();
+                drawer.closeDrawer(GravityCompat.START);
+
             }
         });
 
