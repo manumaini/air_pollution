@@ -8,6 +8,8 @@
 
 
 
+
+
     <TextView
         android:layout_below="@id/rv"
         android:id="@+id/dashboard_text"
@@ -271,4 +273,21 @@
 
 
     </GridLayout>
+
+    <RelativeLayout
+        android:id="@+id/black_layout"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:layout_centerInParent="true"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit2"
+        style="@style/SpinKitView.Large.Wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/colorAccent" />
 </RelativeLayout>

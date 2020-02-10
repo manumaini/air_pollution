@@ -82,7 +82,7 @@ public class loginActivity extends AppCompatActivity {
                             try {
                                 String token = response.getString("token");
                                 editor.putString("token", token);
-                                Log.d(TAG, "onResponse: " + token);
+                                Log.d(TAG, "onResponse" + token);
 
 
                             } catch (JSONException e) {
@@ -93,13 +93,17 @@ public class loginActivity extends AppCompatActivity {
                                 JSONObject user = response.getJSONObject("user");
                                 String user_id = user.getString("id");
                                 String user_name = user.getString("name");
+                                String user_email = user.getString("email");
+                                Log.d(TAG, "onResponse: Details"+user_id+user_email+user_name);
                                 editor.putString("user_id", user_id);
                                 editor.putString("user_name", user_name);
+                                editor.putString("user_email",user_email);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
                             editor.apply();
+                            editor.commit();
 
 
                             Intent intent = new Intent(getBaseContext(), MainActivity.class);
@@ -109,7 +113,7 @@ public class loginActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     progressBar.setVisibility(View.GONE);
-
+                    Log.d(TAG, "onErrorResponse: here3"+error);
                 }
             });
 

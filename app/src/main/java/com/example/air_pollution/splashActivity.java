@@ -52,7 +52,6 @@ public class splashActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-/*
 
                     SharedPreferences sh = getSharedPreferences("login_data", MODE_PRIVATE);
                     if (sh.contains("token")) {
@@ -62,11 +61,10 @@ public class splashActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), loginActivity.class);
                         startActivity(intent);
                     }
-*/
 
-
+/*
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    startActivity(intent);*/
                 }
 
             }
