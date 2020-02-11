@@ -12,9 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.cardview.widget.CardView
                 android:padding="30dp"
                 app:cardCornerRadius="15dp"
@@ -40,7 +42,7 @@
                         android:layout_centerVertical="true"
                         android:id="@+id/sensor_id_text"
                         android:textColor="@color/colorPrimary"
-                        android:text="Select Sensor"
+                        android:text="Sensor Id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
@@ -60,7 +62,244 @@
 
             </androidx.cardview.widget.CardView>
 
-        </RelativeLayout>
+            <androidx.cardview.widget.CardView
+                android:padding="30dp"
+                app:cardCornerRadius="15dp"
+                android:id="@+id/cardview2"
+                android:layout_marginTop="20dp"
+                android:elevation="8dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+
+                <RelativeLayout
+                    android:background="@color/backgrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+
+                    <TextView
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/sensor_name_text"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Sensor name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <EditText
+                        android:layout_toRightOf="@id/sensor_name_text"
+                        android:id="@+id/sensor_name"
+                        android:textColor="@color/white"
+                        android:background="@android:color/transparent"
+                        android:padding="16dp"
+                        android:textColorHint="@color/backgrey"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:padding="30dp"
+                app:cardCornerRadius="15dp"
+                android:id="@+id/cardview3"
+                android:layout_marginTop="20dp"
+                android:elevation="8dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+
+                <RelativeLayout
+                    android:background="@color/backgrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+
+                    <TextView
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/alert_text"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Alert Status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <EditText
+                        android:layout_toRightOf="@id/alert_text"
+                        android:id="@+id/alert"
+                        android:textColor="@color/white"
+                        android:background="@android:color/transparent"
+                        android:padding="16dp"
+                        android:textColorHint="@color/backgrey"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:padding="30dp"
+                app:cardCornerRadius="15dp"
+                android:id="@+id/cardview4"
+                android:layout_marginTop="20dp"
+                android:elevation="8dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+
+                <RelativeLayout
+                    android:background="@color/backgrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+
+                    <TextView
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/Threshold_text"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Threshold value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <EditText
+                        android:layout_toRightOf="@id/Threshold_text"
+                        android:id="@+id/Threshold_value"
+                        android:textColor="@color/white"
+                        android:background="@android:color/transparent"
+                        android:padding="16dp"
+                        android:textColorHint="@color/backgrey"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:padding="30dp"
+                app:cardCornerRadius="15dp"
+                android:id="@+id/cardview5"
+                android:layout_marginTop="20dp"
+                android:elevation="8dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+
+                <RelativeLayout
+                    android:background="@color/backgrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+
+                    <TextView
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/Alert_frequency_text"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Alert Frequency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <EditText
+                        android:layout_toRightOf="@id/Alert_frequency_text"
+                        android:id="@+id/alert_frequency"
+                        android:textColor="@color/white"
+                        android:background="@android:color/transparent"
+                        android:padding="16dp"
+                        android:textColorHint="@color/backgrey"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:padding="30dp"
+                app:cardCornerRadius="15dp"
+                android:id="@+id/cardview6"
+                android:layout_marginTop="20dp"
+                android:elevation="8dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+
+                <RelativeLayout
+                    android:background="@color/backgrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+
+                    <TextView
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/sensor_desc_text"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Sensor Description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <EditText
+                        android:layout_toRightOf="@id/sensor_desc_text"
+                        android:id="@+id/sensor_description"
+                        android:textColor="@color/white"
+                        android:background="@android:color/transparent"
+                        android:padding="16dp"
+                        android:textColorHint="@color/backgrey"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/submit_button"
+                android:textSize="18dp"
+                android:layout_marginHorizontal="36dp"
+                android:paddingVertical="8dp"
+                android:textColor="@color/white"
+                android:text="Submit"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/drawable_shape1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
 
 
