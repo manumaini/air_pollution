@@ -1,6 +1,7 @@
 package com.example.air_pollution;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
@@ -37,6 +39,7 @@ public class dashboard_fragment extends Fragment {
     private String TAG = "dashboard";
     private RelativeLayout black_layout;
     private ProgressBar loading;
+    private CardView ctotal_sensor;
 
     @Nullable
     @Override
@@ -50,6 +53,14 @@ public class dashboard_fragment extends Fragment {
         black_layout = view.findViewById(R.id.black_layout);
         loading = view.findViewById(R.id.spin_kit2);
 
+        ctotal_sensor = view.findViewById(R.id.cardview_washfold);
+        ctotal_sensor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),totalsensorActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

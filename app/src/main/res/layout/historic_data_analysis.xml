@@ -96,11 +96,35 @@
     </androidx.cardview.widget.CardView>
 
 
+    <Button
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="16dp"
+        android:textSize="14dp"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:text="plot Graph"
+        android:background="@drawable/drawable_shape1"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/cardview2"
+        android:id="@+id/plot_graph"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"/>
+
+    <Spinner
+        android:id="@+id/select_sensor"
+        android:layout_marginHorizontal="16dp"
+        android:layout_toLeftOf="@id/plot_graph"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/cardview2"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"/>
+
+
 
 
     <com.github.mikephil.charting.charts.LineChart
-        android:layout_marginTop="70dp"
-        android:layout_below="@id/cardview2"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/plot_graph"
         android:id="@+id/historic_chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
