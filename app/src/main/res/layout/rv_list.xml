@@ -8,17 +8,20 @@
 
 
     <TextView
+        android:fontFamily="@font/font1"
+        android:textStyle="bold"
         android:id="@+id/sensor_name"
         android:layout_marginHorizontal="16dp"
-        android:textColor="@color/white"
-        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24dp"
         android:text="default"
         android:padding="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:layout_below="@id/sensor_name"
+        android:layout_alignBottom="@id/sensor_name"
+        android:layout_toRightOf="@id/sensor_name"
         android:id="@+id/sensor_id"
         android:layout_marginHorizontal="16dp"
         android:textColor="@color/white"
@@ -35,7 +38,6 @@
         android:textColor="@color/white"
         android:textSize="18dp"
         android:text="default"
-        android:padding="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

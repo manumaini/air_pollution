@@ -185,8 +185,8 @@ public class historic_dataFragment extends Fragment {
                         .setOnDateSetListener(new CalendarDatePickerDialogFragment.OnDateSetListener() {
                             @Override
                             public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
-                                
-                                from_date.setText(dayOfMonth + "/" +monthOfYear + "/" + year);
+
+                                from_date.setText(dayOfMonth + "/" +(monthOfYear+1) + "/" + year);
 
                             }
                         })
@@ -207,7 +207,7 @@ public class historic_dataFragment extends Fragment {
                         .setOnDateSetListener(new CalendarDatePickerDialogFragment.OnDateSetListener() {
                             @Override
                             public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
-                                to_date.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
+                                to_date.setText(dayOfMonth + "/" + (monthOfYear+1) + "/" + year);
                             }
                         })
                         .setFirstDayOfWeek(Calendar.SUNDAY)
@@ -222,12 +222,14 @@ public class historic_dataFragment extends Fragment {
         plot_graph.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+                SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
+                String start_date = from_date.getText().toString()+" 00:00:00";
+                String end_date = to_date.getText().toString()+" 00:00:00";
                 Date start = null;
                 Date end = null;
                 try {
-                    start = df.parse(from_date.getText().toString());
-                    end = df.parse(to_date.getText().toString());
+                    start = df.parse(start_date);
+                    end = df.parse(end_date);
 
                     long epoch1 = start.getTime();
                     long epoch2 = end.getTime();
@@ -236,7 +238,7 @@ public class historic_dataFragment extends Fragment {
 
                     RequestQueue requestQueue1 = Volley.newRequestQueue(getActivity());
                     String selected_sensor = sensor_list.getSelectedItem().toString();
-                    Log.d(TAG, "onClick: sensors"+selected_sensor);
+                    Log.d(TAG, "onClick: sensors "+selected_sensor);
 
                     String url2 ="http://18.225.10.79:3011/data_lake_apis_route/data_lake_apis_get_custom_range/"+selected_sensor+"/"+epoch1+"/"+epoch2;
                     //String url2="http://18.225.10.79:3011/data_lake_apis_route/data_lake_apis_get_custom_range/cap06/1579545000000/1580409000000";
@@ -263,6 +265,7 @@ public class historic_dataFragment extends Fragment {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            Log.d(TAG, "onErrorResponse: here in error"+error);
 
                         }
                     });

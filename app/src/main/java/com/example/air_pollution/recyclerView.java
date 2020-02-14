@@ -36,8 +36,8 @@ class recyclerView extends RecyclerView.Adapter<recyclerView.Holder> {
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
 
-        holder.sensor_name.setText("Sensor name: "+sensor_names.get(position));
-        holder.sensor_id.setText("sensor id: " +sensor_ids.get(position));
+        holder.sensor_name.setText(sensor_names.get(position));
+        holder.sensor_id.setText("(" +sensor_ids.get(position)+")");
         holder.sensor_threshold.setText("sensor threshold: "+sensor_threshold.get(position));
 
 

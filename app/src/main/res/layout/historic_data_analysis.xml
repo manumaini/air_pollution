@@ -111,6 +111,7 @@
         android:layout_height="55dp"/>
 
     <Spinner
+        android:background="@color/darkgrey"
         android:id="@+id/select_sensor"
         android:layout_marginHorizontal="16dp"
         android:layout_toLeftOf="@id/plot_graph"
