@@ -111,9 +111,9 @@
         android:layout_height="55dp"/>
 
     <Spinner
-        android:background="@color/darkgrey"
+        android:layout_alignLeft="@id/cardview2"
+        android:background="@drawable/cardview_back"
         android:id="@+id/select_sensor"
-        android:layout_marginHorizontal="16dp"
         android:layout_toLeftOf="@id/plot_graph"
         android:layout_marginTop="16dp"
         android:layout_below="@id/cardview2"

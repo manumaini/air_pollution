@@ -79,12 +79,13 @@ public class sensor_configurationFragment extends Fragment {
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            Log.d(TAG, "onResponse: here in response 3");
                             Toast.makeText(getActivity(), "configuration successfully", Toast.LENGTH_LONG).show();
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-
+                            Log.d(TAG, "onErrorResponse: here in response 4"+error);
                             Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
                         }
                     });

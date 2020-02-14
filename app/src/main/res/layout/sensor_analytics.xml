@@ -38,14 +38,17 @@
                 android:layout_height="wrap_content"/>
 
             <Spinner
+                android:id="@+id/sensor_select2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="9dp"
+                android:layout_marginBottom="0dp"
                 android:layout_toRightOf="@id/text_spinner"
-                android:id="@+id/sensor_select"
-                android:textColor="@color/white"
                 android:background="@android:color/transparent"
                 android:padding="16dp"
-                android:textColorHint="@color/backgrey"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/white"
+                android:textColorHint="@color/backgrey" />
 
 
         </RelativeLayout>

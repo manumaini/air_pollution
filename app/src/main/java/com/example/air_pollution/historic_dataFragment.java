@@ -245,7 +245,11 @@ public class historic_dataFragment extends Fragment {
                     JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+
                             try {
+                                avg.clear();
+                                max.clear();
+                                min.clear();
                                 JSONArray content = response.getJSONArray("content");
                                 for(int i = 0;i< content.length();i++){
                                     JSONObject object = content.getJSONObject(i);
@@ -254,6 +258,7 @@ public class historic_dataFragment extends Fragment {
                                     min.add(new Entry(i,object.getInt("min")));
 
                                 }
+                                Log.d(TAG, "onResponse: "+avg+"  "+max+"  "+min);
 
                                 setData();
 
@@ -411,6 +416,9 @@ public class historic_dataFragment extends Fragment {
 
             lineChart.setVisibleXRangeMaximum(20);
             lineChart.moveViewToX(0);
+
+
+
         }
     }
 
