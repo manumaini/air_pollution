@@ -59,7 +59,7 @@ public class sensor_analyticsFragment extends Fragment {
     private Socket socket;
     private ArrayList<Entry> values = new ArrayList<>();
     private String TAG = "sensor_analyticsFragment";
-    private int count=0;
+    private int count = 0;
 
 
     @Nullable
@@ -67,22 +67,9 @@ public class sensor_analyticsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sensor_analytics, container, false);
         spinner = view.findViewById(R.id.sensor_select2);
-        SharedPreferences sh = this.getActivity().getSharedPreferences("login_data", MODE_PRIVATE);
         sensor = new ArrayList<>();
-        try {
-            IO.Options opts = new IO.Options();
-            opts.forceNew = true;
-            opts.query = "sensor_id=" +"cap06";
-            opts.transports = new String[] {Polling.NAME};
-            opts.transports = new String[] {WebSocket.NAME};
-            socket = IO.socket("http://18.225.10.79:3006", opts);
-
-        } catch (URISyntaxException e) {
-            Log.d(TAG, "onItemSelected: error in connection"+e.getMessage());
-
-        }
-
-        url = "http://18.225.10.79:3010/dashboard_apis_route/dashboard_apis_get_sensor_list/" + sh.getString("user_email", "empty");
+        SharedPreferences sh = this.getActivity().getSharedPreferences("login_data", MODE_PRIVATE);
+        url = "http://192.168.49.209:3010/dashboard_apis_route/dashboard_apis_get_sensor_list/" + sh.getString("user_email", "empty");
 
         RequestQueue requestQueue = Volley.newRequestQueue(this.getActivity());
 
@@ -135,22 +122,66 @@ public class sensor_analyticsFragment extends Fragment {
 
         requestQueue.add(jsonObjectRequest);
 
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String url_socket = "http://18.225.10.79:3006/" +spinner.getSelectedItem().toString().trim();
-                Log.d(TAG, "onItemSelected: "+url_socket);
+                String sensor_id = spinner.getSelectedItem().toString().trim();
+                Log.d(TAG, "onItemSelected: " + sensor_id);
 
+                //setting query for socket
+                try {
+                    IO.Options opts = new IO.Options();
+                    opts.forceNew = true;
+                    opts.query = "sensor_id=" + sensor_id;
+                    opts.transports = new String[]{Polling.NAME};
+                    opts.transports = new String[]{WebSocket.NAME};
+                    socket = IO.socket("http://192.168.49.209:3006", opts);
 
+                } catch (URISyntaxException e) {
+                    Log.d(TAG, "onItemSelected: error in connection" + e.getMessage());
 
-
-                if(socket.connected()){
-                    Toast.makeText(getActivity(),"socket connected successfully!!",Toast.LENGTH_LONG).show();
                 }
-                else {Toast.makeText(getActivity(),"socket not connected",Toast.LENGTH_LONG).show();}
 
-                socket.on("dataupdate",onDataUpdate);
+                //socket events
+                socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+
+                    @Override
+                    public void call(Object... args) {
+
+                    }
+
+                }).on("dataUpdate", new Emitter.Listener() {
+
+                    @Override
+                    public void call(Object... args) {
+                        JSONObject data = (JSONObject) args[0];
+                        try {
+                            values.add(new Entry(count, data.getInt("temp_val")));
+                            Log.d(TAG, "call: " + data.getLong("time_val") + "  " + data.getInt("temp_val"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        count++;
+                        setData();
+
+                    }
+
+                }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+
+                    @Override
+                    public void call(Object... args) {
+                    }
+
+                });
+                socket.connect();
+
+
+                if (socket.connected()) {
+                    Toast.makeText(getActivity(), "socket connected successfully!!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), "socket not connected", Toast.LENGTH_LONG).show();
+                }
+
 
 
 
@@ -161,38 +192,6 @@ public class sensor_analyticsFragment extends Fragment {
 
             }
         });
-
-        Log.d(TAG, "onCreateView: "+socket);
-
-        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-
-            @Override
-            public void call(Object... args) {
-            }
-
-        }).on("dataUpdate", new Emitter.Listener() {
-
-            @Override
-            public void call(Object... args) {
-                JSONObject data = (JSONObject) args[0];
-                try {
-                    values.add(new Entry(count,data.getInt("temp_val")));
-                    Log.d(TAG, "call: "+data.getLong("time_val")+"  "+data.getInt("temp_val"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                count++;
-                setData();
-
-            }
-
-        }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
-
-            @Override
-            public void call(Object... args) {}
-
-        });
-        socket.connect();
 
 
 
@@ -236,23 +235,6 @@ public class sensor_analyticsFragment extends Fragment {
 
         return view;
     }
-
-
-    private Emitter.Listener onDataUpdate = new Emitter.Listener() {
-        @Override
-        public void call(Object... args) {
-            JSONObject data = (JSONObject) args[0];
-            try {
-                values.add(new Entry(data.getLong("time_val"),data.getInt("temp_val")));
-                Log.d(TAG, "call: "+data.getLong("time_val")+data.getInt("temp_val"));
-                setData();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-        }
-    };
 
     private void setData() {
 
@@ -299,5 +281,13 @@ public class sensor_analyticsFragment extends Fragment {
             lineChart.setVisibleXRangeMaximum(20);
             lineChart.moveViewToX(0);
         }
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        socket.disconnect();
     }
 }

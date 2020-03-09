@@ -25,7 +25,7 @@ public class loginActivity extends AppCompatActivity {
 
     private EditText username;
     private EditText password;
-    private String url = "http://18.225.10.79:3000/users/authenticate";
+    private String url = "http://192.168.49.209:3000/users/authenticate";
     private ProgressBar progressBar;
     private String TAG = "loginActivity";
 

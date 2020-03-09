@@ -69,7 +69,7 @@ public class dashboard_fragment extends Fragment {
 
         Log.d(TAG, "onCreateView: user_email "+user_email);
 
-        url = "http://18.225.10.79:3010/dashboard_apis_route/dashboard_apis_get_sensor_meta/"+user_email;
+        url = "http://192.168.49.209:3010/dashboard_apis_route/dashboard_apis_get_sensor_meta/"+user_email;
 
         RequestQueue requestQueue = Volley.newRequestQueue(this.getActivity());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {

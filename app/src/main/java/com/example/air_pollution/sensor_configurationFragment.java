@@ -33,7 +33,7 @@ public class sensor_configurationFragment extends Fragment {
     private EditText alert_frequency;
     private EditText sensor_desc;
     private Button submit;
-    private String url = "http://18.225.10.79:3010/dashboard_apis_route//dashboard_apis_upd";
+    private String url = "http://192.168.49.209:3010/dashboard_apis_route//dashboard_apis_upd";
     private String TAG = "sensor_config";
 
     @Nullable

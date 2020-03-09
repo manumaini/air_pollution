@@ -65,6 +65,7 @@ public class historic_dataFragment extends Fragment {
     private ArrayList<Entry> avg;
     private ArrayList<Entry> max;
     private ArrayList<Entry> min;
+    private RequestQueue requestQueue;
 
 
     @Nullable
@@ -88,7 +89,7 @@ public class historic_dataFragment extends Fragment {
 
         url = "http://18.225.10.79:3010/dashboard_apis_route/dashboard_apis_get_sensor_list/" + sh.getString("user_email", "empty");
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this.getActivity());
+        requestQueue = Volley.newRequestQueue(this.getActivity());
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -182,7 +183,7 @@ public class historic_dataFragment extends Fragment {
             public void onClick(View view) {
 
                 CalendarDatePickerDialogFragment cdp = new CalendarDatePickerDialogFragment()
-                        .setOnDateSetListener(new CalendarDatePickerDialogFragment.OnDateSetListener() {
+                        .setOnDateSetListener( new CalendarDatePickerDialogFragment.OnDateSetListener() {
                             @Override
                             public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
 
@@ -247,9 +248,6 @@ public class historic_dataFragment extends Fragment {
                         public void onResponse(JSONObject response) {
 
                             try {
-                                avg.clear();
-                                max.clear();
-                                min.clear();
                                 JSONArray content = response.getJSONArray("content");
                                 for(int i = 0;i< content.length();i++){
                                     JSONObject object = content.getJSONObject(i);
@@ -291,7 +289,7 @@ public class historic_dataFragment extends Fragment {
                         }
                     });
 
-                    requestQueue1.add(jsonObjectRequest1);
+                    requestQueue.add(jsonObjectRequest1);
 
 
 
