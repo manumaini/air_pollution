@@ -183,11 +183,11 @@ public class historic_dataFragment extends Fragment {
             public void onClick(View view) {
 
                 CalendarDatePickerDialogFragment cdp = new CalendarDatePickerDialogFragment()
-                        .setOnDateSetListener( new CalendarDatePickerDialogFragment.OnDateSetListener() {
+                        .setOnDateSetListener(new CalendarDatePickerDialogFragment.OnDateSetListener() {
                             @Override
                             public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
 
-                                from_date.setText(dayOfMonth + "/" +(monthOfYear+1) + "/" + year);
+                                from_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
 
                             }
                         })
@@ -208,7 +208,7 @@ public class historic_dataFragment extends Fragment {
                         .setOnDateSetListener(new CalendarDatePickerDialogFragment.OnDateSetListener() {
                             @Override
                             public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
-                                to_date.setText(dayOfMonth + "/" + (monthOfYear+1) + "/" + year);
+                                to_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             }
                         })
                         .setFirstDayOfWeek(Calendar.SUNDAY)
@@ -224,81 +224,77 @@ public class historic_dataFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
-                String start_date = from_date.getText().toString()+" 00:00:00";
-                String end_date = to_date.getText().toString()+" 00:00:00";
+                String start_date = from_date.getText().toString() + " 00:00:00";
+                String end_date = to_date.getText().toString() + " 00:00:00";
                 Date start = null;
                 Date end = null;
                 try {
                     start = df.parse(start_date);
                     end = df.parse(end_date);
-
-                    long epoch1 = start.getTime();
-                    long epoch2 = end.getTime();
-
-                    Log.d(TAG, "onClick: time stamp" + epoch1 + "   " + epoch2);
-
-                    RequestQueue requestQueue1 = Volley.newRequestQueue(getActivity());
-
-                    String selected_sensor = sensor_list.getSelectedItem().toString();
-
-                    Log.d(TAG, "onClick: sensors "+selected_sensor);
-
-                    String url2 ="http://192.168.49.209:3011/data_lake_apis_route/data_lake_apis_get_custom_range/"+selected_sensor+"/"+epoch1+"/"+epoch2;
-                    //String url2="http://18.225.10.79:3011/data_lake_apis_route/data_lake_apis_get_custom_range/cap06/1579545000000/1580409000000";
-                    JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-
-                            try {
-                                JSONArray content = response.getJSONArray("content");
-                                for(int i = 0;i< content.length();i++){
-                                    JSONObject object = content.getJSONObject(i);
-                                    avg.add(new Entry(i,Float.valueOf((float) object.getDouble("avg"))));
-                                    max.add(new Entry(i,object.getInt("max")));
-                                    min.add(new Entry(i,object.getInt("min")));
-
-                                }
-                                Log.d(TAG, "onResponse: "+avg+"  "+max+"  "+min);
-
-                                setData();
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d(TAG, "onErrorResponse: here in error"+error);
-
-                        }
-                    });
-                    jsonObjectRequest1.setRetryPolicy(new RetryPolicy() {
-                        @Override
-                        public int getCurrentTimeout() {
-                            return 5000;
-                        }
-
-                        @Override
-                        public int getCurrentRetryCount() {
-                            return 5000;
-                        }
-
-                        @Override
-                        public void retry(VolleyError error) throws VolleyError {
-
-                        }
-                    });
-
-                    requestQueue1.add(jsonObjectRequest1);
-
-
-
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
+                long epoch1 = start.getTime();
+                long epoch2 = end.getTime();
+
+                Log.d(TAG, "onClick: time stamp" + epoch1 + "   " + epoch2);
+
+                RequestQueue requestQueue1 = Volley.newRequestQueue(getActivity());
+
+                String selected_sensor = sensor_list.getSelectedItem().toString();
+
+                Log.d(TAG, "onClick: sensors " + selected_sensor);
+
+                String url2 = "http://192.168.49.209:3011/data_lake_apis_route/data_lake_apis_get_custom_range/" + selected_sensor + "/" + epoch1 + "/" + epoch2;
+                //String url2="http://18.225.10.79:3011/data_lake_apis_route/data_lake_apis_get_custom_range/cap06/1579545000000/1580409000000";
+                JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            JSONArray content = response.getJSONArray("content");
+                            for (int i = 0; i < content.length(); i++) {
+                                JSONObject object = content.getJSONObject(i);
+                                avg.add(new Entry(i, Float.valueOf((float) object.getDouble("avg"))));
+                                max.add(new Entry(i, object.getInt("max")));
+                                min.add(new Entry(i, object.getInt("min")));
+
+                            }
+                            Log.d(TAG, "onResponse: " + avg + "  " + max + "  " + min);
+
+                            setData();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "onErrorResponse: here in error" + error);
+
+                    }
+                });
+                jsonObjectRequest1.setRetryPolicy(new RetryPolicy() {
+                    @Override
+                    public int getCurrentTimeout() {
+                        return 5000;
+                    }
+
+                    @Override
+                    public int getCurrentRetryCount() {
+                        return 5000;
+                    }
+
+                    @Override
+                    public void retry(VolleyError error) throws VolleyError {
+
+                    }
+                });
+
+                requestQueue1.add(jsonObjectRequest1);
             }
         });
 
@@ -307,13 +303,6 @@ public class historic_dataFragment extends Fragment {
     }
 
     private void setData() {
-/*
-        ArrayList<Entry> values = new ArrayList<>();
-
-        for (int i = 0; i < count; i++) {
-            float val = (float) (Math.random() * (range + 1)) + 20;
-            values.add(new Entry(i, val));
-        }*/
 
         LineDataSet set1;
         LineDataSet set2;
@@ -331,8 +320,8 @@ public class historic_dataFragment extends Fragment {
         } else {
             // create a dataset and give it a type
             set1 = new LineDataSet(avg, "DataSet 1");
-            set2 = new LineDataSet(max,"data_set 2");
-            set3 = new LineDataSet(min,"data_set3");
+            set2 = new LineDataSet(max, "data_set 2");
+            set3 = new LineDataSet(min, "data_set3");
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             set1.setCubicIntensity(0.2f);
             set1.setDrawFilled(true);
@@ -416,7 +405,6 @@ public class historic_dataFragment extends Fragment {
 
             lineChart.setVisibleXRangeMaximum(20);
             lineChart.moveViewToX(0);
-
 
 
         }

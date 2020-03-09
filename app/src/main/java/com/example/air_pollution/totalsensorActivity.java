@@ -47,7 +47,7 @@ public class totalsensorActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rView.setLayoutManager(layoutManager);
 
-        final recyclerView adapter = new recyclerView(sensor_names,sensor_id,sensor_threshold);
+        final recyclerView adapter = new recyclerView(sensor_names,sensor_id,sensor_threshold, this);
         rView.setAdapter(adapter);
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);

@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".totalsensorActivity"></activity>
+        <activity android:name=".livedataActivity"></activity>
+        <activity android:name=".totalsensorActivity" />
         <activity
             android:name=".loginActivity"
             android:screenOrientation="portrait"
