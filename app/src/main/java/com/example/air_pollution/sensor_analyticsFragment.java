@@ -67,6 +67,47 @@ public class sensor_analyticsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sensor_analytics, container, false);
         spinner = view.findViewById(R.id.sensor_select2);
+
+        //graph setting
+        lineChart = view.findViewById(R.id.historic_chart);
+
+        lineChart.setViewPortOffsets(0, 0, 0, 0);
+        lineChart.setBackgroundColor(getResources().getColor(R.color.black));
+
+        // no description text
+        lineChart.getDescription().setEnabled(false);
+
+        // enable touch gestures
+        lineChart.setTouchEnabled(true);
+
+        // enable scaling and dragging
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(true);
+
+        // if disabled, scaling can be done on x- and y-axis separately
+        lineChart.setPinchZoom(false);
+
+        lineChart.setDrawGridBackground(false);
+        lineChart.setMaxHighlightDistance(300);
+        XAxis x = lineChart.getXAxis();
+        x.setEnabled(false);
+
+        YAxis y = lineChart.getAxisLeft();
+        y.setTypeface(typeface);
+        y.setLabelCount(6, false);
+        y.setTextColor(Color.WHITE);
+        y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        y.setDrawGridLines(false);
+        y.setAxisLineColor(Color.WHITE);
+        lineChart.getAxisRight().setEnabled(false);
+
+        lineChart.getLegend().setEnabled(false);
+
+        lineChart.animateXY(2000, 2000);
+
+        lineChart.invalidate();
+
+
         sensor = new ArrayList<>();
         SharedPreferences sh = this.getActivity().getSharedPreferences("login_data", MODE_PRIVATE);
         url = "http://192.168.49.209:3010/dashboard_apis_route/dashboard_apis_get_sensor_list/" + sh.getString("user_email", "empty");
@@ -147,7 +188,7 @@ public class sensor_analyticsFragment extends Fragment {
 
                     @Override
                     public void call(Object... args) {
-
+                        Toast.makeText(getActivity(), "socket connected successfully!!", Toast.LENGTH_LONG).show();
                     }
 
                 }).on("dataUpdate", new Emitter.Listener() {
@@ -192,46 +233,6 @@ public class sensor_analyticsFragment extends Fragment {
 
             }
         });
-
-
-
-        lineChart = view.findViewById(R.id.historic_chart);
-
-        lineChart.setViewPortOffsets(0, 0, 0, 0);
-        lineChart.setBackgroundColor(getResources().getColor(R.color.black));
-
-        // no description text
-        lineChart.getDescription().setEnabled(false);
-
-        // enable touch gestures
-        lineChart.setTouchEnabled(true);
-
-        // enable scaling and dragging
-        lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(true);
-
-        // if disabled, scaling can be done on x- and y-axis separately
-        lineChart.setPinchZoom(false);
-
-        lineChart.setDrawGridBackground(false);
-        lineChart.setMaxHighlightDistance(300);
-        XAxis x = lineChart.getXAxis();
-        x.setEnabled(false);
-
-        YAxis y = lineChart.getAxisLeft();
-        y.setTypeface(typeface);
-        y.setLabelCount(6, false);
-        y.setTextColor(Color.WHITE);
-        y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-        y.setDrawGridLines(false);
-        y.setAxisLineColor(Color.WHITE);
-        lineChart.getAxisRight().setEnabled(false);
-
-        lineChart.getLegend().setEnabled(false);
-
-        lineChart.animateXY(2000, 2000);
-
-        lineChart.invalidate();
 
         return view;
     }

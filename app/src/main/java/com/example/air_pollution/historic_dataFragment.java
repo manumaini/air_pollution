@@ -87,7 +87,7 @@ public class historic_dataFragment extends Fragment {
 
         SharedPreferences sh = this.getActivity().getSharedPreferences("login_data", MODE_PRIVATE);
 
-        url = "http://18.225.10.79:3010/dashboard_apis_route/dashboard_apis_get_sensor_list/" + sh.getString("user_email", "empty");
+        url = "http://192.168.49.209:3010/dashboard_apis_route/dashboard_apis_get_sensor_list/" + sh.getString("user_email", "empty");
 
         requestQueue = Volley.newRequestQueue(this.getActivity());
 
@@ -238,10 +238,12 @@ public class historic_dataFragment extends Fragment {
                     Log.d(TAG, "onClick: time stamp" + epoch1 + "   " + epoch2);
 
                     RequestQueue requestQueue1 = Volley.newRequestQueue(getActivity());
+
                     String selected_sensor = sensor_list.getSelectedItem().toString();
+
                     Log.d(TAG, "onClick: sensors "+selected_sensor);
 
-                    String url2 ="http://18.225.10.79:3011/data_lake_apis_route/data_lake_apis_get_custom_range/"+selected_sensor+"/"+epoch1+"/"+epoch2;
+                    String url2 ="http://192.168.49.209:3011/data_lake_apis_route/data_lake_apis_get_custom_range/"+selected_sensor+"/"+epoch1+"/"+epoch2;
                     //String url2="http://18.225.10.79:3011/data_lake_apis_route/data_lake_apis_get_custom_range/cap06/1579545000000/1580409000000";
                     JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
                         @Override
@@ -289,7 +291,7 @@ public class historic_dataFragment extends Fragment {
                         }
                     });
 
-                    requestQueue.add(jsonObjectRequest1);
+                    requestQueue1.add(jsonObjectRequest1);
 
 
 
